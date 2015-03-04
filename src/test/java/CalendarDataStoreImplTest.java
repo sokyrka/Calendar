@@ -2,15 +2,16 @@ import com.home.common.Event;
 import com.home.common.Person;
 import com.home.datastore.CalendarDataStore;
 import com.home.datastore.CalendarDataStoreImpl;
-import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InOrder;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
+import static junit.framework.Assert.assertFalse;
 import static junit.framework.TestCase.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class CalendarDataStoreImplTest {
 
@@ -23,7 +24,11 @@ public class CalendarDataStoreImplTest {
 
     @Test
     public void testPublish(){
+        CalendarDataStore dataStore = mock(CalendarDataStore.class);
+        dataStore.publish(event);
 
+        InOrder inOrder = inOrder(dataStore);
+        inOrder.verify(dataStore).publish(event);
     }
 
     @Test
@@ -46,5 +51,25 @@ public class CalendarDataStoreImplTest {
         Event returned = store.getEvent(event.getTitle());
 
         assertEquals(event, returned);
+    }
+
+    @Test
+    public void testSearchEventForPerson(){
+        CalendarDataStore store = mock(CalendarDataStoreImpl.class);
+        when(store.searchEventForPerson(new Person.Builder().build(), new GregorianCalendar()))
+                .thenReturn(new ArrayList<Event>());
+
+        ArrayList<Event> returned = store.searchEventForPerson(new Person.Builder().build(), new GregorianCalendar());
+
+        assertEquals(new ArrayList<Event>(), returned);
+    }
+
+    @Test
+    public void testFreePersonInCurrentTime(){
+        CalendarDataStore store = mock(CalendarDataStoreImpl.class);
+
+        boolean returned = store.freePersonInCurrentTime(new Person.Builder().build(), new GregorianCalendar());
+
+        assertFalse(returned);
     }
 }

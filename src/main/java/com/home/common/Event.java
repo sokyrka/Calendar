@@ -1,17 +1,18 @@
 package com.home.common;
 
-import java.util.Date;
+import java.io.Serializable;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.UUID;
 
-public class Event {
+public class Event implements Serializable{
 
     private final String title;
     private final String description;
     private final UUID id;
     private final List<Person> attenders;
-    private final Date startDate;
-    private final Date endDate;
+    private final GregorianCalendar startDate;
+    private final GregorianCalendar endDate;
 
     private Event(Builder builder){
         this.title = builder.title;
@@ -38,11 +39,11 @@ public class Event {
         return attenders;
     }
 
-    public Date getStartDate() {
+    public GregorianCalendar getStartDate() {
         return startDate;
     }
 
-    public Date getEndDate() {
+    public GregorianCalendar getEndDate() {
         return endDate;
     }
 
@@ -92,8 +93,8 @@ public class Event {
         private String description;
         private UUID id;
         private List<Person> attenders;
-        private Date startDate;
-        private Date endDate;
+        private GregorianCalendar startDate;
+        private GregorianCalendar endDate;
 
         public Builder(){
 
@@ -128,12 +129,12 @@ public class Event {
             return this;
         }
 
-        public Builder startDate(Date startDate){
+        public Builder startDate(GregorianCalendar startDate){
             this.startDate = startDate;
             return this;
         }
 
-        public Builder endDate(Date endDate){
+        public Builder endDate(GregorianCalendar endDate){
             this.endDate = endDate;
             return this;
         }
