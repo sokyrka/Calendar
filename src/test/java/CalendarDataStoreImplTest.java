@@ -56,10 +56,10 @@ public class CalendarDataStoreImplTest {
     @Test
     public void testSearchEventForPerson(){
         CalendarDataStore store = mock(CalendarDataStoreImpl.class);
-        when(store.searchEventForPerson(new Person.Builder().build(), new GregorianCalendar()))
+        when(store.searchEventsForPerson(new Person.Builder().build(), new GregorianCalendar()))
                 .thenReturn(new ArrayList<Event>());
 
-        ArrayList<Event> returned = store.searchEventForPerson(new Person.Builder().build(), new GregorianCalendar());
+        ArrayList<Event> returned = store.searchEventsForPerson(new Person.Builder().build(), new GregorianCalendar());
 
         assertEquals(new ArrayList<Event>(), returned);
     }

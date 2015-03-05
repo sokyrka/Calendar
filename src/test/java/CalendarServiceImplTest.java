@@ -59,10 +59,10 @@ public class CalendarServiceImplTest {
     @Test
     public void testSearchEventForPerson() throws RemoteException{
         CalendarService service = mock(CalendarServiceImpl.class);
-        when(service.searchEventForPerson(new Person.Builder().build(), new GregorianCalendar()))
+        when(service.searchEventsForPerson(new Person.Builder().build(), new GregorianCalendar()))
                 .thenReturn(new ArrayList<Event>());
 
-        ArrayList<Event> returned = service.searchEventForPerson(new Person.Builder().build(), new GregorianCalendar());
+        ArrayList<Event> returned = service.searchEventsForPerson(new Person.Builder().build(), new GregorianCalendar());
 
         assertEquals(new ArrayList<Event>(), returned);
     }

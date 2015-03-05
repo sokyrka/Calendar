@@ -9,8 +9,12 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.logging.Logger;
 
 public class MainClient {
+
+    private static final Logger log = Logger.getAnonymousLogger();
+
     public static void main(String[] args) throws RemoteException {
 
         ApplicationContext factory = new ClassPathXmlApplicationContext("clientApplicationContext.xml");
@@ -59,8 +63,7 @@ public class MainClient {
         service.addEvent(studyEvent);
         service.addEvent(partyEvent);
 
-        ArrayList<Event> eventArrayList = service.searchEventForPerson(ivanIvanov, new GregorianCalendar(2015, 03, 05, 19, 30));
-
-        System.out.println(eventArrayList.toString());
+        ArrayList<Event> eventArrayList = service.searchEventsForPerson(ivanIvanov, new GregorianCalendar(2015, 03, 05, 19, 30));
+        log.info(eventArrayList.toString());
     }
 }

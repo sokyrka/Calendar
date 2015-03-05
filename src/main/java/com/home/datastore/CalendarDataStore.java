@@ -14,9 +14,9 @@ public interface CalendarDataStore {
 
     Event getEvent(String title);
 
-    ArrayList<Event> searchEventForPerson(Person person, GregorianCalendar time);
+    ArrayList<Event> searchEventsForPerson(Person person, GregorianCalendar time);
 
     boolean freePersonInCurrentTime(Person person, GregorianCalendar time);
 
-    ArrayList<GregorianCalendar> theRightTimeForTheEvent(Person person);
+    ArrayList<Event> searchEventsByTitleAndAttenders(String title, String mail);
 }
