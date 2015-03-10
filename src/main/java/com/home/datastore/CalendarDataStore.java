@@ -5,12 +5,15 @@ import com.home.common.Person;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 public interface CalendarDataStore {
 
     void publish(Event event);
 
     Event remove(String title);
+
+    Event addAttenders(String title, List<Person> attenders);
 
     Event getEvent(String title);
 

@@ -72,4 +72,5 @@ public class CalendarDataStoreImplTest {
 
         assertFalse(returned);
     }
+
 }

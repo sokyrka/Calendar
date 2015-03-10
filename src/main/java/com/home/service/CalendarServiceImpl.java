@@ -32,6 +32,11 @@ public class CalendarServiceImpl implements CalendarService{
     }
 
     @Override
+    public Event addAttenders(String title, List<Person> attenders){
+        return calendarDataStore.addAttenders(title, attenders);
+    }
+
+    @Override
     public Event searchEvent(String title) {
         return calendarDataStore.getEvent(title);
     }

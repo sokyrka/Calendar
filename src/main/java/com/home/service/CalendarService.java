@@ -17,6 +17,8 @@ public interface CalendarService extends Remote{
 
     Event removeEvent(String title) throws RemoteException;
 
+    Event addAttenders(String title, List<Person> attenders);
+
     Event searchEvent(String title) throws RemoteException;
 
     ArrayList<Event> searchEventsForPerson(Person person, GregorianCalendar time) throws RemoteException;
