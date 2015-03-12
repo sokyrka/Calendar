@@ -14,7 +14,7 @@
 <form action="${pageContext.request.contextPath}/successEvent.html" method="get">
     <p>Title</p><input type="text" name="title"></br>
     <p>Description</p><input type="text" name="description"></br>
-    <p>Attender</p><input type="text" name="attender"></br>
+    <p>Attender</p><input type="text" name="attender"></br></br>
     <input type="submit">
 </form>
 

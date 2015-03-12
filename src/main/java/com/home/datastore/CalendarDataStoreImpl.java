@@ -1,6 +1,7 @@
 package com.home.datastore;
 
 import com.home.common.Event;
+import com.home.common.EventAdapter;
 import com.home.common.Person;
 
 import javax.xml.bind.JAXBContext;
@@ -17,18 +18,19 @@ public class CalendarDataStoreImpl implements CalendarDataStore {
 
     public CalendarDataStoreImpl(){
         store = new HashMap<String, Event>();
-        /*File file = new File("D:/event_store");
+        File file = new File("D:/event_store");
         File[] fileList = file.listFiles();
         for(File restoreFile : fileList){
             try{
                 JAXBContext jaxbContext = JAXBContext.newInstance(EventAdapter.class);
                 Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-                Event recoverEvent = (Event) unmarshaller.unmarshal(restoreFile);
+                EventAdapter recoverEventAdapter = (EventAdapter) unmarshaller.unmarshal(restoreFile);
+                Event recoverEvent = EventAdapter.eventAdapterConvertToEvent(recoverEventAdapter);
                 store.put(recoverEvent.getTitle(), recoverEvent);
             }catch (JAXBException e){
                 e.printStackTrace();
             }
-        }*/
+        }
     }
 
     @Override

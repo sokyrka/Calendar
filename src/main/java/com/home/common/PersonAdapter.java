@@ -1,6 +1,4 @@
-package com.home.datastore;
-
-import com.home.common.Person;
+package com.home.common;
 
 import javax.xml.bind.annotation.XmlType;
 import java.io.Serializable;
@@ -22,6 +20,17 @@ public class PersonAdapter implements Serializable{
         this.secondName = person.getSecondName();
         this.email = person.getEmail();
         this.phone = person.getPhone();
+    }
+
+    public static Person personAdapterConvertToPerson(PersonAdapter personAdapter){
+        Person person = new Person.Builder()
+                .firstName(personAdapter.getFirstName())
+                .secondName(personAdapter.getSecondName())
+                .email(personAdapter.getEmail())
+                .phone(personAdapter.getPhone())
+                .build();
+
+        return person;
     }
 
     public String getFirstName() {

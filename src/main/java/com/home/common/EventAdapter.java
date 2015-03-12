@@ -1,7 +1,4 @@
-package com.home.datastore;
-
-import com.home.common.Event;
-import com.home.common.Person;
+package com.home.common;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -39,6 +36,24 @@ public class EventAdapter implements Serializable {
                 this.attenders.add(new PersonAdapter(person));
             }
         }
+    }
+
+    public static Event eventAdapterConvertToEvent(EventAdapter eventAdapter){
+        List<PersonAdapter> arrayList = eventAdapter.getAttenders();
+        ArrayList<Person> personArrayList = new ArrayList<>();
+        for(PersonAdapter personAdapter : arrayList){
+            personArrayList.add(PersonAdapter.personAdapterConvertToPerson(personAdapter));
+        }
+        Event event = new Event.Builder()
+                .title(eventAdapter.getTitle())
+                .description(eventAdapter.getDescription())
+                .id(eventAdapter.getId())
+                .attenders(personArrayList)
+                .startDate(eventAdapter.getStartDate())
+                .endDate(eventAdapter.getEndDate())
+                .build();
+
+        return event;
     }
 
     public String getTitle() {
