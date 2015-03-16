@@ -11,6 +11,10 @@
     <title></title>
 </head>
 <body>
-
+<form action="${pageContext.request.contextPath}/successSearchEvent.html" method="get">
+    <p>Enter event title</p>
+    <input type="text" name="title">
+    <input type="submit" value="Search">
+</form>
 </body>
 </html>

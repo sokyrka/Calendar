@@ -11,6 +11,16 @@
     <title></title>
 </head>
 <body>
+<table>
+    <%for(int i = 0; i<10; i++){%>
 
+    <tr>
+        <td>Ololo</td>
+        <td>22</td>
+        <td>444</td>
+    </tr>
+
+    <%}%>
+</table>
 </body>
 </html>

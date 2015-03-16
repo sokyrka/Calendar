@@ -51,7 +51,7 @@ public class CalendarDataStoreImpl implements CalendarDataStore {
     @Override
     public Event remove(String title) {
         File file = new File("D:\\event_store/" + title + ".xml");
-        file.deleteOnExit();
+        file.delete();
         return store.remove(title);
     }
 
@@ -85,6 +85,15 @@ public class CalendarDataStoreImpl implements CalendarDataStore {
     @Override
     public Event getEvent(String title) {
         return store.get(title);
+    }
+
+    @Override
+    public ArrayList<Event> getAllEvents(){
+        ArrayList<Event> result = new ArrayList<>();
+        for(Map.Entry<String, Event> entry : store.entrySet()){
+            result.add(entry.getValue());
+        }
+        return result;
     }
 
     @Override

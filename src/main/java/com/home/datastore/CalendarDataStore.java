@@ -17,6 +17,8 @@ public interface CalendarDataStore {
 
     Event getEvent(String title);
 
+    ArrayList<Event> getAllEvents();
+
     ArrayList<Event> searchEventsForPerson(Person person, GregorianCalendar time);
 
     boolean freePersonInCurrentTime(Person person, GregorianCalendar time);

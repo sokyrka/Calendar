@@ -24,13 +24,7 @@
     <p>Description :<input type="text" name="description"></p>
     <p>Start Date :<input type="date" name="startDate"></p>
     <p>End Date :<input type="date" name="endDate"></p>
-    <input type="submit" name="Create new Event">
-
-    <br><br>
-    <form><button formaction="/newEvent.html" >Create new Event</button>
-        <button formaction="/newEvent.html" >Show all Events</button>
-        <button formaction="/newEvent.html" >Search Event</button>
-        <button formaction="/newEvent.html" >Delete Event</button></form>
+    <input type="submit" value="Create new Event">
 </form>
 </div>
 </body>

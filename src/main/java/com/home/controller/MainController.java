@@ -47,7 +47,6 @@ public class MainController {
     @RequestMapping(value = "/newEvent.html", method = RequestMethod.GET)
     public ModelAndView createNewEvent(){
         ModelAndView modelAndView = new ModelAndView("NewEvent");
-
         return modelAndView;
     }
 
@@ -76,4 +75,39 @@ public class MainController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/deleteEvent.html", method = RequestMethod.GET)
+    public ModelAndView deleteEvent(){
+        ModelAndView modelAndView = new ModelAndView("DeleteEvent");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/successDeleteEvent.html", method = RequestMethod.GET)
+    public ModelAndView successDeleteEvent(@RequestParam("title") String title){
+        calendarService.removeEvent(title);
+        ModelAndView modelAndView = new ModelAndView("SuccessDeleteEvent");
+        modelAndView.addObject("msg", "The event " + title + " was successfully deleted");
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value="/searchEvent.html", method = RequestMethod.GET)
+    public ModelAndView searchEvent(){
+        ModelAndView modelAndView = new ModelAndView("SearchEvent");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/successSearchEvent.html", method = RequestMethod.GET)
+    public ModelAndView successSearchEvent(@RequestParam("title") String title){
+        Event event = calendarService.searchEvent(title);
+
+        ModelAndView modelAndView = new ModelAndView("SuccessSearchEvent");
+        modelAndView.addObject("msg", event.toString());
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/allEvents.html", method = RequestMethod.GET)
+    public ModelAndView showAllEvents(){
+        ModelAndView modelAndView = new ModelAndView("ShowAllEvents");
+        return modelAndView;
+    }
 }

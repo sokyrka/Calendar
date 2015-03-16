@@ -12,10 +12,10 @@
 </head>
 <body>
 <h3>${msg}</h3>
-<form><button formaction="/newEvent.html" >Create new Event</button>
-<button formaction="/newEvent.html" >Show all Events</button>
-<button formaction="/newEvent.html" >Search Event</button>
-<button formaction="/newEvent.html" >Delete Event</button></form>
+<form><button formaction="/newEvent.html">Create new Event</button>
+<button formaction="/allEvents.html">Show all Events</button>
+<button formaction="/searchEvent.html">Search Event</button>
+<button formaction="/deleteEvent.html">Delete Event</button></form>
 
 </body>
 </html>

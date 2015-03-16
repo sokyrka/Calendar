@@ -45,6 +45,11 @@ public class CalendarServiceImpl implements CalendarService{
     }
 
     @Override
+    public ArrayList<Event> getAllEvents(){
+        return calendarDataStore.getAllEvents();
+    }
+
+    @Override
     public ArrayList<Event> searchEventsForPerson(Person person, GregorianCalendar time) {
         return calendarDataStore.searchEventsForPerson(person, time);
     }
