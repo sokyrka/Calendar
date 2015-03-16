@@ -11,32 +11,68 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 @Controller
 public class MainController {
 
-    @RequestMapping(value = "/newEvent.html", method = RequestMethod.GET)
-    public ModelAndView createEventForm(){
-        ModelAndView modelAndView = new ModelAndView("NewEventForm");
+    Person person;
+    private CalendarServiceImpl calendarService = new CalendarServiceImpl(new CalendarDataStoreImpl());
+
+    @RequestMapping(value = "/welcomePage.html", method = RequestMethod.GET)
+    public ModelAndView createEnterForm(){
+        ModelAndView modelAndView = new ModelAndView("WelcomePage");
 
         return modelAndView;
     }
 
-    @RequestMapping(value = "/successEvent.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/menuPage.html", method = RequestMethod.GET)
+    public ModelAndView successCreatePerson(@RequestParam("firstName") String firstName,
+                                           @RequestParam("secondName") String secondName,
+                                           @RequestParam("email") String email){
+
+        person = new Person.Builder()
+                .firstName(firstName)
+                .secondName(secondName)
+                .email(email)
+                .phone("78678")
+                .build();
+
+        ModelAndView modelAndView = new ModelAndView("MenuPage");
+        modelAndView.addObject("msg", "Hello " + firstName);
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/newEvent.html", method = RequestMethod.GET)
+    public ModelAndView createNewEvent(){
+        ModelAndView modelAndView = new ModelAndView("NewEvent");
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/successNewEvent.html", method = RequestMethod.GET)
     public ModelAndView successCreateEvent(@RequestParam("title") String title,
                                            @RequestParam("description") String description,
-                                           @RequestParam("attender") String name){
+                                           @RequestParam("startDate") String startDate,
+                                           @RequestParam("endDate") String endDate
+                                           ) throws Exception{
 
-        ArrayList<Person> personArrayList = new ArrayList<>();
-        personArrayList.add(new Person.Builder().firstName(name).build());
-        CalendarServiceImpl calendarService = new CalendarServiceImpl(new CalendarDataStoreImpl());
+        ArrayList<Person> arrayList = new ArrayList<>();
+        arrayList.add(new Person.Builder().build());
+        Event event = new Event.Builder()
+                .title(title)
+                .description(description)
+                .id(UUID.randomUUID())
+                .startDate(calendarService.dateConverter(startDate))
+                .endDate(calendarService.dateConverter(endDate))
+                .attenders(arrayList)
+                .build();
 
-        Event event = calendarService.createEvent(title, description, personArrayList);
         calendarService.addEvent(event);
 
-        ModelAndView modelAndView = new ModelAndView("SuccessEvent");
-        modelAndView.addObject("msg", "You have already create new Event: " + calendarService.searchEvent(title).toString());
-
+        ModelAndView modelAndView = new ModelAndView("SuccessNewEvent");
+        modelAndView.addObject("msg", "Success create new Event "+ title);
         return modelAndView;
     }
 

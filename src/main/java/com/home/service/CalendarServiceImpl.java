@@ -4,7 +4,10 @@ import com.home.common.Event;
 import com.home.common.Person;
 import com.home.datastore.CalendarDataStore;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -54,5 +57,14 @@ public class CalendarServiceImpl implements CalendarService{
     @Override
     public ArrayList<Event> searchEventsByTitleAndAttenders(String title, String mails){
         return calendarDataStore.searchEventsByTitleAndAttenders(title, mails);
+    }
+
+    public GregorianCalendar dateConverter(String date) throws Exception{
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Date parsedDate = df.parse(date);
+        GregorianCalendar gc = new GregorianCalendar();
+        gc.setTime(parsedDate);
+
+        return gc;
     }
 }
