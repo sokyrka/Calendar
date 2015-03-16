@@ -101,13 +101,14 @@ public class MainController {
         Event event = calendarService.searchEvent(title);
 
         ModelAndView modelAndView = new ModelAndView("SuccessSearchEvent");
-        modelAndView.addObject("msg", event.toString());
+        modelAndView.addObject("event", event);
         return modelAndView;
     }
 
     @RequestMapping(value = "/allEvents.html", method = RequestMethod.GET)
     public ModelAndView showAllEvents(){
         ModelAndView modelAndView = new ModelAndView("ShowAllEvents");
+        modelAndView.addObject("calendarService", calendarService);
         return modelAndView;
     }
 }

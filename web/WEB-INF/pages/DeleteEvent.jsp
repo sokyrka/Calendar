@@ -8,15 +8,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>
-
-    </title>
+    <title>Delete Event</title>
 </head>
 <body>
 <form action="${pageContext.request.contextPath}/successDeleteEvent.html" method="get">
     <p>Enter event title</p>
     <input type="text" name="title">
     <input type="submit" value="Delete">
+</form>
+<form>
+    <button formaction="/newEvent.html">Create new Event</button>
+    <button formaction="/allEvents.html">Show all Events</button>
+    <button formaction="/searchEvent.html">Search Event</button>
+    <button formaction="/deleteEvent.html">Delete Event</button>
 </form>
 </body>
 </html>

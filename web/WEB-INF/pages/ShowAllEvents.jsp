@@ -1,3 +1,5 @@
+<%@ page import="com.home.common.Event" %>
+<%@ page import="com.home.service.CalendarServiceImpl" %>
 <%--
   Created by IntelliJ IDEA.
   User: Home
@@ -8,19 +10,26 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+    <title>Show all Events</title>
 </head>
 <body>
-<table>
-    <%for(int i = 0; i<10; i++){%>
-
+<table border="1">
+    <%CalendarServiceImpl service = (CalendarServiceImpl) request.getAttribute("calendarService");
+        for(Event event : service.getAllEvents()){%>
     <tr>
-        <td>Ololo</td>
-        <td>22</td>
-        <td>444</td>
+        <td><%=event.getTitle()%></td>
+        <td><%=event.getDescription()%></td>
+        <td><%=event.getStartDate()%></td>
+        <td><%=event.getEndDate()%></td>
     </tr>
-
     <%}%>
 </table>
+<br>
+<form>
+    <button formaction="/newEvent.html">Create new Event</button>
+    <button formaction="/allEvents.html">Show all Events</button>
+    <button formaction="/searchEvent.html">Search Event</button>
+    <button formaction="/deleteEvent.html">Delete Event</button>
+</form>
 </body>
 </html>
