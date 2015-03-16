@@ -108,7 +108,8 @@ public class MainController {
     @RequestMapping(value = "/allEvents.html", method = RequestMethod.GET)
     public ModelAndView showAllEvents(){
         ModelAndView modelAndView = new ModelAndView("ShowAllEvents");
-        modelAndView.addObject("calendarService", calendarService);
+        ArrayList<Event> arrayList = calendarService.getAllEvents();
+        modelAndView.addObject("arrayList", arrayList);
         return modelAndView;
     }
 }
