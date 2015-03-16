@@ -6,7 +6,6 @@ import com.home.common.Person;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.util.*;
@@ -21,15 +20,8 @@ public class CalendarDataStoreImpl implements CalendarDataStore {
         File file = new File("D:/event_store");
         File[] fileList = file.listFiles();
         for(File restoreFile : fileList){
-            try{
-                JAXBContext jaxbContext = JAXBContext.newInstance(EventAdapter.class);
-                Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-                EventAdapter recoverEventAdapter = (EventAdapter) unmarshaller.unmarshal(restoreFile);
-                Event recoverEvent = EventAdapter.eventAdapterConvertToEvent(recoverEventAdapter);
-                store.put(recoverEvent.getTitle(), recoverEvent);
-            }catch (JAXBException e){
-                e.printStackTrace();
-            }
+            EventDownloadThread thread = new EventDownloadThread(restoreFile, store);
+            thread.run();
         }
     }
 
@@ -37,15 +29,9 @@ public class CalendarDataStoreImpl implements CalendarDataStore {
     public void publish(Event event) {
         store.put(event.getTitle(), event);
         eventAdapter = new EventAdapter(event);
-        try{
-            File file = new File("D:\\event_store/" + event.getTitle() + ".xml");
-            JAXBContext jaxbContext = JAXBContext.newInstance(EventAdapter.class);
-            Marshaller marshaller = jaxbContext.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            marshaller.marshal(eventAdapter, file);
-        }catch (JAXBException e){
-            e.printStackTrace();
-        }
+        File file = new File("D:\\event_store/" + event.getTitle() + ".xml");
+        EventUploadThread thread = new EventUploadThread(file, eventAdapter);
+        thread.run();
     }
 
     @Override
@@ -90,9 +76,11 @@ public class CalendarDataStoreImpl implements CalendarDataStore {
     @Override
     public ArrayList<Event> getAllEvents(){
         ArrayList<Event> result = new ArrayList<>();
+
         for(Map.Entry<String, Event> entry : store.entrySet()){
             result.add(entry.getValue());
         }
+
         return result;
     }
 
