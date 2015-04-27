@@ -20,8 +20,8 @@ public class CalendarDataStoreImpl implements CalendarDataStore {
         File file = new File("D:/event_store");
         File[] fileList = file.listFiles();
         for(File restoreFile : fileList){
-            EventDownloadThread thread = new EventDownloadThread(restoreFile, store);
-            thread.run();
+            Thread thread = new Thread(new EventDownloadThread(restoreFile, store));
+            thread.start();
         }
     }
 
@@ -30,8 +30,8 @@ public class CalendarDataStoreImpl implements CalendarDataStore {
         store.put(event.getTitle(), event);
         eventAdapter = new EventAdapter(event);
         File file = new File("D:\\event_store/" + event.getTitle() + ".xml");
-        EventUploadThread thread = new EventUploadThread(file, eventAdapter);
-        thread.run();
+        Thread thread = new Thread(new EventUploadThread(file, eventAdapter));
+        thread.start();
     }
 
     @Override

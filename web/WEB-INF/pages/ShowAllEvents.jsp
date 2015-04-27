@@ -21,8 +21,8 @@
         <tr>
             <td><%=event.getTitle()%></td>
             <td><%=event.getDescription()%></td>
-            <td><%=event.getStartDate()%></td>
-            <td><%=event.getEndDate()%></td>
+            <td><%=event.getStartDate().getTime().toString()%></td>
+            <td><%=event.getEndDate().getTime().toString()%></td>
         </tr>
         <%}%>
     </table>

@@ -9,9 +9,6 @@ import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.util.HashMap;
 
-/**
- * Created by Home on 16.03.2015.
- */
 public class EventDownloadThread implements Runnable {
 
     private final File file;
